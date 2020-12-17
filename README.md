@@ -1,6 +1,6 @@
 # flywheel/spm-motion-correction
 
-SPM Motion Correction
+SPM Motion Correction.
 
 ## Inputs
 The input to this Gear is a NIfTI file.
@@ -36,12 +36,35 @@ Once you have the CLI, you can login:
 fw login <your_flywheel_api_key>
 ```
 
-#### 2. Build the image with Docker
+#### 2. Compile the MATLAB SAE
+___Important note:__ This code requires SPM, if you have not already downloaded a compiled version of SPM (or compiled it yourself) now is the time!_ 
+
+This Gear runs a Matlab Executable via the Matlab Compiler Runtime, which is built into the base image. _Note that the image uses MCR v93 (Matlabr2017b)_ - this MCR versions used to maintain Docker image compatibility with the other tools.
+
+You can make changes to the [source code](src/spm_motion_correction_build.m). Each time you do that, you will need to compile the [executable](src/bin) and re-build the Docker image. 
+
+In order to compile the Matlab executable you can use the provided [`.m`](src/spm_motion_correction_build.m) file (you need to use Matlabr2017b (with the MATLAB Compiler) for the binary to be compatible with the [Docker image](Dockerfile) we generate here). 
+
+The [`spm_motion_correction_build.m`](src/spm_motion_correction_build.m) file contains all the required instruction to compile the binary. 
+
+You can run the code from the command line like so:
+```bash
+/<path_to_your_matlabr2017b_binary> -nodesktop -r 'spm_motion_correction_build.m'
+```
+
+If you already have your Matlab 2017b terminal open, you can simply run [the code](src/spm_motion_correction_build.m):
+```Matlab
+spm_motion_correction_build(<path_to_spm>);
+
+```
+
+
+#### 3. Build the image with Docker
 ```#bash
 git clone https://github.com/flywheel-apps/spm-motion-correction
 docker build -t flywheel/spm-motion-correction:1.0.0
 ```
-_Important note: The version (`1.0.0` in the example above) should be read from the `version` key within [manifest.json](manifest.json) file.
+___Important note:__ The version (`1.0.0` in the example above) should be read from the `version` key within [manifest.json](manifest.json) file._
 
 #### 3. Run the Gear locally with the test data
 ```bash
@@ -71,24 +94,5 @@ Completed                               :          17:42:27 - 15/12/2020
 Complete!
 
 
-```
-
-### Developer's Corner: Compiling the Matlab Executable
-This Gear runs a Matlab Executable via the Matlab Compiler Runtime, which is build in the base image. __Note that the image uses MCR v93 (Matlabr2017b)__ - this MCR versions used to maintain Docker image compatibility with the other tools.
-
-If you find that need to make changes to the [source code](src/spm_motion_correction_build.m) you will need to recompile the [executable](src/bin/) and re-build the Docker image. 
-
-In order to recompile the Matlab executable you can use the provided [`.m`](src/spm_motion_correction_build.m) file (you need to use Matlabr2017b for the binary to be compatible with the [Docker image](Dockerfile) we generate here). 
-
-The [`spm_motion_correction_build.m`](src/spm_motion_correction_build.m) file contains all the required instruction to compile the binary. 
-
-You can run the code from the command line like so:
-```bash
-/<path_to_your_matlabr2017b_binary> -nodesktop -r 'spm_motion_correction_build.m'
-```
-
-If you already have your Matlab 2017b terminal open, you can simply run [the code](src/spm_motion_correction_build.m):
-```Matlab
-spm_motion_correction_build
 ```
 
