@@ -1,0 +1,42 @@
+{
+  "name": "spm-motion-correction",
+  "label": "SPM: Motion Correction",
+  "description": "Perform Motion Correction with standalone SPM version. Co-registration to first frame.",
+  "maintainer": "Flywheel <support@flywheel.io>",
+  "author": "SPM",
+  "url": "https://github.com/flywheel-apps/spm-motion-correction",
+  "source": "https://github.com/flywheel-apps/spm-motion-correction",
+  "license": "GPL-2.0",
+  "flywheel": "0",
+  "version": "1.0.0",
+  "custom": {
+    "flywheel": {
+      "suite": "SPM"
+    },
+    "gear-builder": {
+      "image": "flywheel/spm-motion-correction:1.0.0",
+      "category": "analysis"
+    }
+  },
+  "inputs": {
+    "nifti": {
+      "base": "file",
+      "description": "Output archive (.zip) from dtiinit gear run, or AFQ.",
+      "type": {
+        "enum": [
+          "nifti"
+        ]
+      }
+    }
+  },
+  "config": {},
+  "environment": {
+    "LD_LIBRARY_PATH": "/opt/mcr/v93/runtime/glnxa64:/opt/mcr/v93/bin/glnxa64:/opt/mcr/v93/sys/os/glnxa64",
+    "XAPPLRESDIR": "XAPPLRESDIR"
+  },
+  "command": "/usr/local/bin/run_spm_motion_correction.sh /opt/mcr/v93 /flywheel/v0/config.json"
+}
+
+
+
+
