@@ -4,8 +4,8 @@ function spm_motion_correction_build(spm_path)
 %       matlab -nodesktop -r 'spm_motion_correction_build.m'
 
 % Check that we are running a compatible matlab version (important for docker execution)
-if (~contains(version, '9.3')) || (~contains(computer, 'GLNXA64'))
-    error('You must compile this function using R2017b (9.3.0.713579 (R2017b)) 64-bit (glnxa64). You are using %s, %s', version, computer);
+if (~contains(version, '9.7')) || (~contains(computer, 'GLNXA64'))
+    error('You must compile this function using R2019b. You are using %s, %s', version, computer);
 end
 
 % Make sure we're in the right location

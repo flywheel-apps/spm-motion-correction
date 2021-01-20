@@ -31,10 +31,10 @@
   },
   "config": {},
   "environment": {
-    "LD_LIBRARY_PATH": "/opt/mcr/v93/runtime/glnxa64:/opt/mcr/v93/bin/glnxa64:/opt/mcr/v93/sys/os/glnxa64",
+    "LD_LIBRARY_PATH": "/opt/mcr/v97/runtime/glnxa64:/opt/mcr/v97/bin/glnxa64:/opt/mcr/v97/sys/os/glnxa64",
     "XAPPLRESDIR": "XAPPLRESDIR"
   },
-  "command": "/usr/local/bin/run_spm_motion_correction.sh /opt/mcr/v93 /flywheel/v0/config.json"
+  "command": "/usr/local/bin/run_spm_motion_correction.sh /opt/mcr/v97 /flywheel/v0/config.json"
 }
 
 

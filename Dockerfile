@@ -1,7 +1,7 @@
 # Create Docker container that can run spm_motion_correction analysis.
 
 # Start with the Matlab runtime container
-FROM flywheel/matlab-mcr:v93
+FROM flywheel/matlab-mcr:v97
 
 MAINTAINER Michael Perry
 
